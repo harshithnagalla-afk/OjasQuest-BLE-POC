@@ -30,7 +30,4 @@ export const DEVICE_NAME_PREFIX = 'ACME_DEV';
  * `optionalServices`, or the browser will refuse access to it even after a
  * successful GATT connection.
  */
-export const REQUEST_DEVICE_OPTIONS: RequestDeviceOptions = {
-  filters: [{ services: [SERVICE_UUID] }, { namePrefix: DEVICE_NAME_PREFIX }],
-  optionalServices: [SERVICE_UUID],
-};
+export const REQUEST_DEVICE_OPTIONS: RequestDeviceOptions = { acceptAllDevices: true, optionalServices: [SERVICE_UUID], };
