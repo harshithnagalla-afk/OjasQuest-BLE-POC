@@ -10,5 +10,5 @@
     "skipLibCheck": true,
     "noEmit": true
   },
- "include": ["*.ts", "*.tsx"]
+  "include": ["frontend/src/**/*.ts", "frontend/src/**/*.tsx"]
 }
