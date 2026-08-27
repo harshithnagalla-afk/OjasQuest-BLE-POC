@@ -1,0 +1,523 @@
+/* ==========================================================================
+   OjasQuest BLE — design tokens
+   Palette grounded in an instrument-panel/radio-dial feel: an ink-teal
+   base (not pure black) with a warm copper accent for action and a cool
+   cyan reserved for "connected" — deliberately not the near-black+neon or
+   cream+serif combinations that read as generic AI defaults.
+   ========================================================================== */
+
+:root {
+  --bg: #0e1a1f;
+  --panel: #142530;
+  --panel-raised: #1a2e3a;
+  --border: #23404d;
+  --text: #eaf2f1;
+  --text-muted: #8fa6a8;
+  --text-faint: #5c7376;
+
+  --accent: #e8a33d;
+  --accent-strong: #f2b25a;
+  --accent-ink: #2a1c08;
+  --success: #4fd1c5;
+  --success-ink: #06211f;
+  --error: #e85d4c;
+  --error-ink: #2c0e09;
+
+  --radius: 10px;
+  --radius-lg: 16px;
+  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  background-image: radial-gradient(circle at 20% -10%, rgba(232, 163, 61, 0.08), transparent 45%),
+    radial-gradient(circle at 90% 10%, rgba(79, 209, 197, 0.06), transparent 40%);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 2px;
+}
+
+button {
+  font-family: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ---- shell / layout ---------------------------------------------------- */
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 20px 64px;
+}
+
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+
+.wordmark-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px rgba(232, 163, 61, 0.18);
+}
+
+.topbar {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  object-fit: cover;
+}
+
+.avatar-fallback {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--panel-raised);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 14px;
+}
+
+.identity-name {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.identity-email {
+  font-size: 12px;
+  color: var(--text-faint);
+  line-height: 1.3;
+}
+
+.spacer {
+  margin-left: auto;
+}
+
+/* ---- buttons ------------------------------------------------------------ */
+
+.btn {
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--panel-raised);
+  color: var(--text);
+  padding: 11px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.1s ease;
+}
+
+.btn:hover:not(:disabled) {
+  border-color: var(--text-faint);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 600;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--text-muted);
+  padding: 8px 10px;
+}
+
+.btn-ghost:hover:not(:disabled) {
+  color: var(--text);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-danger-outline {
+  background: transparent;
+  border-color: var(--error);
+  color: var(--error);
+}
+
+.btn-danger-outline:hover:not(:disabled) {
+  background: rgba(232, 93, 76, 0.1);
+}
+
+/* ---- card / panel -------------------------------------------------------- */
+
+.card {
+  width: 100%;
+  max-width: 560px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 16px;
+  letter-spacing: 0.01em;
+}
+
+/* ---- login --------------------------------------------------------------- */
+
+.login-card {
+  width: 100%;
+  max-width: 360px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  margin-top: 8vh;
+}
+
+.login-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+
+.login-subtitle {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin: 0 0 24px;
+  line-height: 1.5;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-faint);
+  font-size: 12px;
+  margin: 18px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.field {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 11px 12px;
+  color: var(--text);
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.field::placeholder {
+  color: var(--text-faint);
+}
+
+.field:focus {
+  border-color: var(--accent);
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: var(--success);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 14px;
+}
+
+.link-button:hover {
+  text-decoration: underline;
+}
+
+.error-text {
+  color: var(--error);
+  font-size: 13px;
+  margin: 14px 0 0;
+  line-height: 1.5;
+}
+
+/* ---- connection status ---------------------------------------------------- */
+
+.status-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-dot.disconnected {
+  background: var(--text-faint);
+}
+.status-dot.connecting {
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(232, 163, 61, 0.16);
+}
+.status-dot.connected {
+  background: var(--success);
+  box-shadow: 0 0 0 4px rgba(79, 209, 197, 0.16);
+}
+.status-dot.error {
+  background: var(--error);
+}
+
+.status-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.status-message {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 4px 0 16px;
+  line-height: 1.5;
+}
+
+.status-message.error {
+  color: var(--error);
+}
+
+/* ---- scan control: the signature element ---------------------------------
+   A sweeping ring around the connect control while scanning/connecting —
+   echoing the actual thing happening on the radio: a BLE peripheral
+   broadcasting advertisement packets outward on a fixed interval. Static
+   (no animation) when idle or connected; respects reduced-motion globally.
+   ---------------------------------------------------------------------- */
+
+.scan-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 0 4px;
+}
+
+.scan-orb {
+  position: relative;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.scan-orb-core {
+  position: relative;
+  z-index: 2;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--accent-ink);
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.scan-orb-core:hover:not(:disabled) {
+  background: var(--accent-strong);
+}
+
+.scan-orb-core:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.scan-orb-core.is-connected {
+  background: var(--success);
+  color: var(--success-ink);
+}
+
+.scan-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(232, 163, 61, 0.4);
+  opacity: 0;
+}
+
+.scan-orb.is-scanning .scan-ring {
+  animation: scan-sweep 1.8s ease-out infinite;
+}
+
+.scan-orb.is-scanning .scan-ring.delay {
+  animation-delay: 0.6s;
+}
+
+@keyframes scan-sweep {
+  0% {
+    transform: scale(0.65);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+
+.device-name {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0 0 2px;
+  text-align: center;
+}
+
+.device-id {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+  text-align: center;
+  word-break: break-all;
+  margin-bottom: 14px;
+}
+
+.pairing-note {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.pairing-note.error {
+  color: var(--error);
+}
+
+/* ---- terminal / live panel -------------------------------------------- */
+
+.command-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.command-input {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.command-input:focus {
+  border-color: var(--accent);
+}
+
+.terminal {
+  background: #081014;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.7;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.terminal-line {
+  color: #b7d8d4;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.terminal-empty {
+  color: var(--text-faint);
+}

@@ -1,0 +1,10 @@
+PORT=4000
+
+# Origin of the deployed/local frontend, for CORS.
+FRONTEND_ORIGIN=http://localhost:5173
+
+# Path to the Firebase service account JSON downloaded from
+# Firebase Console > Project settings > Service accounts > Generate new
+# private key. NEVER commit this file or put its contents in frontend code —
+# it grants full admin access to your Firebase project.
+GOOGLE_APPLICATION_CREDENTIALS=./serviceAccountKey.json
